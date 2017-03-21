@@ -1,0 +1,216 @@
+<br>
+<div class="container-fluid">
+    <br>
+    <br>
+    <h2> {{heading3}}</h2>
+
+    <br>
+    <br>
+    <h2>Candidate details</h2>
+    <br>
+    <br>
+    <form #form="ngForm" novalidate>
+
+        <!--FIRST NAME-->
+        <div class="form-group" [class.has-error]="firstname.invalid && firstname.dirty">
+            <label class="control-label">First Name</label>
+            <input #firstname="ngModel" maxlength="20" pattern="^[A-z]+$" required type="text" class="form-control" name="firstName" [(ngModel)]="model.firstname">
+            <div *ngIf="firstname.invalid && firstname.dirty" class="alert alert-danger">
+                Enter First Name
+            </div>
+        </div>
+
+        <!--LAST NAME-->
+        <div class="form-group" [class.has-error]="lastname.invalid && lastname.dirty">
+            <label class="control-label">Last Name</label>
+            <input #lastname="ngModel" maxlength="20" pattern="^[A-z]+$" required type="text" class="form-control" name="lastName" [(ngModel)]="model.lastname">
+            <div *ngIf="lastname.invalid && lastname.dirty" class="alert alert-danger">
+                Enter Last Name
+            </div>
+        </div>
+
+        <!--DATE OF BIRTH-->
+        <div class="form-group" [class.has-error]="dob.invalid && dob.dirty">
+            <label class="control-label">Date of birth</label>
+            <input #dob="ngModel" maxlength="20" required type="date" class="form-control" name="dob" [(ngModel)]="model.dob">
+            <div *ngIf="dob.invalid && dob.dirty" class="alert alert-danger">
+                Enter Date Of Birth
+            </div>
+        </div>
+
+        <!--EMAIL ID-->
+        <div class="form-group" [class.has-error]="email.invalid && email.dirty">
+            <label class="control-label">E-Mail</label>
+            <input #email="ngModel" maxlength="40" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required type="text" class="form-control" name="email" [(ngModel)]="model.email">
+            <div *ngIf="email.invalid && email.dirty" class="alert alert-danger">
+                Enter E-Mail ID
+            </div>
+        </div>
+
+        <!--LANGUAGE-->
+        <div class="form-group" [class.has-error]="hasplerror">
+            <label class="control-label">Primary Language</label>
+            <select class="form-control" #primarylang="ngModel" name="primarylanguage" [(ngModel)]="model.primarylanguage" (blur)="vprimarylanguage(primarylang.value)" (change)="vprimarylanguage(primarylang.value)">
+                <option value="default">Select a Language</option>
+                <option *ngFor="let lang of languages">
+                    {{ lang }}
+                </option>
+            </select>
+        </div>
+
+        <!--CONTENCY TO BE HIRED FOR-->
+        <div class="form-group" [class.has-error]="hascompetencyerror">
+            <label class="control-label">Comptency to be Hired for</label>
+            <select class="form-control" #comp="ngModel" name="competency" [(ngModel)]="model.competency" (blur)="vcomptency(comp.value)" (change)="vcomptency(comp.value)">
+                <option value="default">Select a Competency</option>
+                <option *ngFor="let competency of competencies">
+                    {{ competency }}
+                </option>
+            </select>
+        </div>
+        <br>
+        <br>
+        <h2>Cultural Skills</h2>
+        <br>
+        <br>
+
+        <div class="form-group" [class.has-error]="hasquestion1error">
+
+
+            <label class="control-label">Listening Skills</label>
+            <select class="form-control" #qone="ngModel" name="q1" [(ngModel)]="model.q1" (blur)="vquestions1(qone.value)" (change)="vquestions1(qone.value)">
+                <option value="default">Rate</option>
+                <option *ngFor="let rate of ratings">
+                    {{ rate }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group" [class.has-error]="hasquestion2error">
+            <label class="control-label">Ability to Ask Questions</label>
+            <select class="form-control" #qtwo="ngModel" name="q2" [(ngModel)]="model.q2" (blur)="vquestions2(qtwo.value)" (change)="vquestions2(qtwo.value)">
+                <option value="default">Rate</option>
+                <option *ngFor="let rate of ratings">
+                    {{ rate }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group" [class.has-error]="hasquestion3error">
+            <label class="control-label">Team Spirit</label>
+            <select class="form-control" #qthree="ngModel" name="q3" [(ngModel)]="model.q3" (blur)="vquestions3(qthree.value)" (change)="vquestions3(qthree.value)">
+                <option value="default">Rate</option>
+                <option *ngFor="let rate of ratings">
+                    {{ rate }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group" [class.has-error]="hasquestion4error">
+            <label class="control-label">People Skills</label>
+            <select class="form-control" #qfour="ngModel" name="q4" [(ngModel)]="model.q4" (blur)="vquestions4(qfour.value)" (change)="vquestions4(qfour.value)">
+                <option value="default">Rate</option>
+                <option *ngFor="let rate of ratings">
+                    {{ rate }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group" [class.has-error]="hasquestion5error">
+            <label class="control-label">Confidence Level</label>
+            <select class="form-control" #qfive="ngModel" name="q5" [(ngModel)]="model.q5" (blur)="vquestions5(qfive.value)" (change)="vquestions5(qfive.value)">
+                <option value="default">Rate</option>
+                <option *ngFor="let rate of ratings">
+                    {{ rate }}
+                </option>
+            </select>
+        </div>
+
+        <!--SKILLS-->
+        <div class="form-group" [class.has-error]="skill1.invalid && skill1.dirty">
+            <label class="control-label">Hobbies/Interests</label>
+            <input #skill1="ngModel" maxlength="200" required type="text" class="form-control" name="Skill1" [(ngModel)]="model.skill1">
+            <div *ngIf="skill1.invalid && skill1.dirty" class="alert alert-danger">
+                Enter Feedback </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="skill2.invalid && skill2.dirty">
+            <label class="control-label">Key Strengths</label>
+            <input #skill2="ngModel" maxlength="200" required type="text" class="form-control" name="Skill2" [(ngModel)]="model.skill2">
+            <div *ngIf="skill2.invalid && skill2.dirty" class="alert alert-danger">
+                Enter Feedback </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="skill3.invalid && skill3.dirty">
+            <label class="control-label">Key Achievements</label>
+            <input #skill3="ngModel" maxlength="200" required type="text" class="form-control" name="Skill3" [(ngModel)]="model.skill3">
+            <div *ngIf="skill3.invalid && skill3.dirty" class="alert alert-danger">
+                Enter Feedback </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="skill4.invalid && skill4.dirty">
+            <label class="control-label">Expectation from next job/MINDTREE</label>
+            <input #skill4="ngModel" maxlength="200" required type="text" class="form-control" name="Skill4" [(ngModel)]="model.skill4">
+            <div *ngIf="skill4.invalid && skill4.dirty" class="alert alert-danger">
+                Enter Feedback </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="skill5.invalid && skill5.dirty">
+            <label class="control-label">Area of Improvement</label>
+            <input #skill5="ngModel" maxlength="200" required type="text" class="form-control" name="Skill5" [(ngModel)]="model.skill5">
+            <div *ngIf="skill5.invalid && skill5.dirty" class="alert alert-danger">
+                Enter Feedback </div>
+        </div>
+        <!--RADIO BUTTONS-->
+
+        <label>Communication skills</label>
+        <div class="radio">
+            <label>
+                 <input #cs="ngModel" type="radio" name="comskills" value="Average" [(ngModel)]="model.comskills">
+                     Average
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                 <input #cs="ngModel" type="radio" name="comskills" value="Good" [(ngModel)]="model.comskills">
+                     Good
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                 <input #cs="ngModel" type="radio" name="comskills" value="Exellent" [(ngModel)]="model.comskills">
+                     Exellent
+            </label>
+        </div>
+
+        <label>Over-All Assessment</label>
+        <div class="radio">
+            <label>
+                 <input #sl="ngModel" type="radio" name="slct" value="Selected" [(ngModel)]="model.slct">
+                     Selected
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                 <input #sl="ngModel" type="radio" name="slct" value="Not Selected" [(ngModel)]="model.slct">
+                     Not Selected
+            </label>
+        </div>
+
+
+
+
+
+
+
+
+
+    </form>
+
+    <!--OK BUTTON ENABLED AFTER VALIDATION-->
+
+    <button class="btn btn-primary btn-lg" type="submit" [disabled]="!form.valid || hasplerror || hascompetencyerror || primarylang.pristine || comp.pristine || hasquestion1error|| qone.pristine || hasquestion2error || qtwo.pristine ||hasquestion3error|| qthree.pristine||hasquestion4error|| qfour.pristine||hasquestion5error|| qfive.pristine || cs.pristine || sl.pristine">Ok</button>
+</div>
+<br>
+<br>
+<!--<div>Model {{model | json}} <br> Angular {{form.value |json}}</div>-->
